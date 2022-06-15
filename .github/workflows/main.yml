@@ -18,13 +18,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - id: latest_tag
-        run: echo "::set-output name=LATEST_RELEASE_TAG::$(git describe --tags `git rev-list --tags --max-count=1`)"
+        run: echo "$(git describe --tags `git rev-list --tags --max-count=1`)"
       
       - name: curr tag
         run: echo "${GITHUB_REF#refs/tags/}"
         
       - name: update tag
-        run: echo "$(git describe --tags `git rev-list --tags --max-count=1`)" >> ${GITHUB_REF#refs/tags/}
+        run: echo "$(git describe --tags `git rev-list --tags --max-count=1`)" > $GITHUB_REF
       
       - name: curr tag
         run: echo "${GITHUB_REF#refs/tags/}"
