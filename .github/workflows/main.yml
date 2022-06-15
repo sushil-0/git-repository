@@ -17,7 +17,7 @@ jobs:
       latest_tag: ${{ steps.latest_tag.outputs.LATEST_RELEASE_TAG }}
     steps:
       - uses: actions/checkout@v2
-      - id: latest_tag
+      - name: Get Latest Tag
         run: echo "$(git describe --tags `git rev-list --tags --max-count=1`)"
       
       - name: curr tag
