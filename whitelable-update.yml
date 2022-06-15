@@ -1,0 +1,20 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '*'
+    repository_dispatch:
+      types: [whitelabel-update]
+      
+  release:
+    types: [created]
+
+jobs:
+  set_tag:
+    name: Update Tags
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Latest Tag
+        run: echo "$(git describe --tags `git rev-list --tags --max-count=1`)"
+  
