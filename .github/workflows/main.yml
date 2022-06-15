@@ -2,8 +2,9 @@ name: Release
 
 on:
   push:
-    tags:
-      - '*'
+    branches: [master]
+#     tags:
+#       - '*'
     
   repository_dispatch:
     types: [whitelabel-update]
@@ -19,13 +20,13 @@ jobs:
       - name: Get Latest Tag
         run: echo "$(git describe --tags `git rev-list --tags --max-count=1`)"
       
-      - name: curr tag
-        run: echo "${GITHUB_REF#refs/tags/}"
+#       - name: curr tag
+#         run: echo "${GITHUB_REF#refs/tags/}"
         
-      - name: update tag
-        run: echo "$(git describe --tags `git rev-list --tags --max-count=1`)" > $GITHUB_REF
+#       - name: update tag
+#         run: echo "$(git describe --tags `git rev-list --tags --max-count=1`)" > $GITHUB_REF
       
-      - name: curr tag
-        run: echo "${GITHUB_REF#refs/tags/}"
+#       - name: curr tag
+#         run: echo "${GITHUB_REF#refs/tags/}"
         
 
