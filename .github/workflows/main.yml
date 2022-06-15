@@ -20,7 +20,7 @@ jobs:
       - name: Get Latest Tag
         run: echo "$(git describe --tags `git rev-list --tags --max-count=1`)"
 
-    - name: Create tag
+      - name: Create tag
         uses: actions/github-script@v5
         with:
           script: |
@@ -30,7 +30,7 @@ jobs:
               ref: 'refs/tags/<tagname>',
               sha: context.sha
             })
-      
+
 #       - name: curr tag
 #         run: echo "${GITHUB_REF#refs/tags/}"
         
