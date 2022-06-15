@@ -15,6 +15,6 @@ jobs:
     name: Update Tags
     runs-on: ubuntu-latest
     steps:
-      - name: Get Latest Tag
+      - name: Get Latest Tag from github
         run: echo "$(git describe --tags `git rev-list --tags --max-count=1`)"
   
