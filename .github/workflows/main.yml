@@ -2,18 +2,19 @@ name: Release
 
 on:
   push:
-    tags:
-      - '*'
-    repository_dispatch:
-      types: [whitelabel-update]
-      
-  release:
-    types: [created]
-
+    branches: [master]
+#     tags:
+#       - '*'
+    
+  repository_dispatch:
+    types: [whitelabel-update]
+    
 jobs:
   set_tag:
     name: Update Tags
     runs-on: ubuntu-latest
+    outputs:
+      latest_tag: ${{ steps.latest_tag.outputs.LATEST_RELEASE_TAG }}
     steps:
       - uses: actions/checkout@v2
       - name: Get Latest Tag
@@ -29,3 +30,12 @@ jobs:
               ref: 'refs/tags/<tagname>',
               sha: context.sha
             })
+      
+#       - name: curr tag
+#         run: echo "${GITHUB_REF#refs/tags/}"
+        
+#       - name: update tag
+#         run: echo "$(git describe --tags `git rev-list --tags --max-count=1`)" > $GITHUB_REF
+      
+#       - name: curr tag
+#         run: echo "${GITHUB_REF#refs/tags/}"
